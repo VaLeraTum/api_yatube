@@ -13,6 +13,7 @@ from api.permission import AuthorOrReadOnly
 
 
 class PostViewSet(viewsets.ModelViewSet):
+    """Обрабатывает API запросы для модели Постов."""
     queryset = Post.objects.all()
     serializer_class = PostSerializer
     permission_classes = (AuthorOrReadOnly,)
@@ -23,11 +24,13 @@ class PostViewSet(viewsets.ModelViewSet):
 
 
 class GroupViewSet(viewsets.ReadOnlyModelViewSet):
+    """Обрабатывает API запросы для модели Групп."""
     queryset = Group.objects.all()
     serializer_class = GroupSerializer
 
 
 class CommentViewSet(viewsets.ModelViewSet):
+    """Обрабатывает API запросы для модели Комментариев."""
     serializer_class = CommentSerializer
     permission_classes = (AuthorOrReadOnly,)
 
@@ -42,6 +45,7 @@ class CommentViewSet(viewsets.ModelViewSet):
 
 class FollowViewSet(mixins.CreateModelMixin, mixins.ListModelMixin,
                     viewsets.GenericViewSet):
+    """Обрабатывает API запросы для модели Подписок."""
     serializer_class = FollowSerializer
     permission_classes = (permissions.IsAuthenticated,)
     filter_backends = (filters.SearchFilter,)
